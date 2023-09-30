@@ -52,10 +52,11 @@ while running:
     clear_canvas()
 
     draw_line()
-    delay(0.5)
     handle_events()
+
     x1,y1 =x2,y2
     x2,y2 = random.randint(50, 900),random.randint(50, 800)
+
 close_canvas()
 
 
