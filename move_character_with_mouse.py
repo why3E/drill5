@@ -22,16 +22,21 @@ def handle_events():
 running = True
 frame =0
 
+x1,y1 = random.randint(-600, 600),random.randint(-400, 400)
+x2,y2 = random.randint(-600, 600),random.randint(-400, 400)
+
 while running:
     clear_canvas()
     TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    character.clip_draw(frame * 100 , 100 , 100 , 100, 700 , 600)
-    character.clip_draw(frame * 100 ,0 , 100 , 100, 500 , 600)
-    hand.clip_draw(0 , 0 , 50 , 50 ,640 , 512)
+    
+    character.clip_draw(frame * 100 , 0 , 100 , 100, x1 ,y1)
+    hand.clip_draw(0 , 0 , 50 , 50 ,x2 , y2)
 
     frame +=1
     frame %=8
     
+    handle_events()
+
     delay(0.2)
     update_canvas()
 
