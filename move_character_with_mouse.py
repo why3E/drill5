@@ -22,7 +22,7 @@ def draw_line():
     global frame,x1,x2,y1,y2
 
 
-    for i in range(0, 100+1, 4):
+    for i in range(0, 100+1, 8):
         frame = frame % 8
 
         t = i / 100
@@ -31,8 +31,11 @@ def draw_line():
 
         clear_canvas()
         TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-        character.clip_draw(frame * 100 , 0 , 100 , 100, x , y)
         hand.clip_draw(0 , 0 , 50 , 50 , x2 , y2)
+        if(x2>x1):
+            character.clip_draw(frame * 100 , 100 , 100 , 100, x , y)
+        else:
+            character.clip_draw(frame * 100 , 0 , 100 , 100, x , y)
         update_canvas()
         frame +=1
         delay(0.1)
@@ -49,10 +52,10 @@ while running:
     clear_canvas()
 
     draw_line()
-    delay(1.0)
+    delay(0.5)
     handle_events()
-
-
+    x1,y1 =x2,y2
+    x2,y2 = random.randint(50, 900),random.randint(50, 800)
 close_canvas()
 
 
