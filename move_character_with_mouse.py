@@ -18,27 +18,40 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             running = False
 
+def draw_line():
+    global frame,x1,x2,y1,y2
+
+
+    for i in range(0, 100+1, 4):
+        frame = frame % 8
+
+        t = i / 100
+        x = (1-t)*x1 + t*x2
+        y = (1-t)*y1 + t*y2
+
+        clear_canvas()
+        TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
+        character.clip_draw(frame * 100 , 0 , 100 , 100, x , y)
+        hand.clip_draw(0 , 0 , 50 , 50 , x2 , y2)
+        update_canvas()
+        frame +=1
+        delay(0.1)
+    
+
 
 running = True
 frame =0
 
-x1,y1 = random.randint(-600, 600),random.randint(-400, 400)
-x2,y2 = random.randint(-600, 600),random.randint(-400, 400)
+x1,y1 = random.randint(50, 900),random.randint(50, 800)
+x2,y2 = random.randint(50, 900),random.randint(50, 800)
 
 while running:
     clear_canvas()
-    TUK_ground.draw(TUK_WIDTH // 2, TUK_HEIGHT // 2)
-    
-    character.clip_draw(frame * 100 , 0 , 100 , 100, x1 ,y1)
-    hand.clip_draw(0 , 0 , 50 , 50 ,x2 , y2)
 
-    frame +=1
-    frame %=8
-    
+    draw_line()
+    delay(1.0)
     handle_events()
 
-    delay(0.2)
-    update_canvas()
 
 close_canvas()
 
